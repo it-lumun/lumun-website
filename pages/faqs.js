@@ -1,9 +1,22 @@
+import Head from 'next/head'
+import Footer from '../components/Footer'
+import styles from '../styles/Home.module.css'
+
 export default function Faqs() {
     return (
-      <div>
-        <h1>FAQs</h1>
-        <h1>FAQs</h1>
+      <div className={styles.container}>
 
-      </div>
+      <Head>
+        <title>LUMUN FAQs</title>
+        <meta name="description" content="LUMUN - Frequenctly Asked Questions" />
+        <link rel="icon" href="/lumun.ico" />
+      </Head>
+
+      <main className={styles.main}>
+        <h1>FAQs will be uploaded soon</h1>
+      </main>
+
+      <Footer/>
+    </div>
     )
   }

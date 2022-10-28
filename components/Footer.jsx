@@ -17,7 +17,7 @@ export default function Footer() {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <Stack spacing={2} direction>
+            <Stack spacing={2} direction="row">
                 {links.facebook &&
                     <Link href={links.facebook} target="_blank" rel="noopener noreferrer">
                         <IconButton>
