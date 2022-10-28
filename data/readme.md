@@ -1,0 +1,1 @@
+logo.png -> Image with this name will be rendered as LUMUN LOGO
