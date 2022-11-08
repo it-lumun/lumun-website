@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
+// Hooks
+import useWindowSize from '../hooks/useWindowSize'
+
 // Components
 import Footer from '../components/Footer'
 import Letter from '../components/Letter'
@@ -18,6 +21,8 @@ import president_pic from '../data/profile_pics/president.jpg'
 
 export default function Home() {
 
+  const { width } = useWindowSize()
+
   return (
     <div className={styles.container}>
       <Head>
@@ -32,8 +37,8 @@ export default function Home() {
             src={logo}
             alt='LUMUN Logo'
             style={{ borderRadius: '50%' }}
-            width={600}
-            height={600}
+            width={width > 800 ? 600 : width * 0.8}
+            height={width > 800 ? 600 : width * 0.8}
           />
         </Box>
 

@@ -29,6 +29,11 @@
   flex-grow: 1;
 }
 
+.landingImage{
+  z-index: -100;
+  position: fixed;
+}
+
 .title a {
   color: #0070f3;
   text-decoration: none;
