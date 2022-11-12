@@ -27,13 +27,13 @@ export default function Footer() {
                 {links.twitter &&
                     <Link href={links.twitter} target="_blank" rel="noopener noreferrer">
                         <IconButton sx={{ margin: '0 8px' }}>
-                            <InstagramIcon />
+                            <TwitterIcon />
                         </IconButton>
                     </Link>}
                 {links.instagram &&
                     <Link href={links.instagram} target="_blank" rel="noopener noreferrer">
                         <IconButton>
-                            <TwitterIcon />
+                            <InstagramIcon />
                         </IconButton>
                     </Link>}
                 {links.linkedIn &&

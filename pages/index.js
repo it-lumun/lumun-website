@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css'
 import useWindowSize from '../hooks/useWindowSize'
 
 // Components
-import Footer from '../components/Footer'
+import Footer from '../components/FooterContent'
 import Letter from '../components/Letter'
 
 // Material UI

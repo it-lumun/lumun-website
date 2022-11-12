@@ -1,11 +1,11 @@
-import Head from 'next/head'
-import Footer from '../components/Footer'
+import { useState }  from 'react';
 import styles from '../styles/Home.module.css'
-import CommitteeCard from '../components/CommitteeCard'
-// import committeesData from '../data/committees'
-
-import { Stack } from '@mui/material'
-
+import PropTypes from 'prop-types';
+import Head from 'next/head'
+import Footer from '../components/FooterContent'
+import useWindowSize from '../hooks/useWindowSize'
+import { Tab, Tabs, Typography, Box } from '@mui/material'
+ 
 export default function Committees() {
   return (
     <div className={styles.container}>
@@ -17,21 +17,99 @@ export default function Committees() {
       </Head>
 
       <main className={styles.main}>
-        <Stack spacing={5}>
-          {committeesData?.map((committee, index) => (
-            <CommitteeCard
-              key={index}
-              title={committee?.title}
-              description={committee?.description}
-              chairs={committee?.chairs}
-            />
-          ))}
-        </Stack>
+        <VerticalTabs />
       </main>
 
       <Footer />
     </div>
   )
+}
+
+export function VerticalTabs() {
+  const [value, setValue] = useState(0);
+
+  const { width } = useWindowSize();
+
+  const tabWidth = () => width > 1000 ? 300 : width * 0.3
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box
+      sx={{ flexGrow: 0, display: 'flex' }}
+    >
+      <div styles={{postion: 'absolute', minWidth: '30vw'}}>
+        {/* if Tab is selected Its color would be red */}
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Committees"
+          sx={{ borderRight: 1, borderColor: 'divider', width: tabWidth(),
+            '& .Mui-selected': {color: 'red'}
+          }}
+          TabIndicatorProps={{sx: {bgcolor: 'red'}}}
+        >
+          {
+            committeesData.map((committee, index) => (
+              <Tab label={committee.title} {...a11yProps(index)} />
+            ))
+          }
+        </Tabs>
+      </div>
+      {
+        committeesData.map((committee, index) => (
+          <TabPanel value={value} index={index}>
+            <Typography variant='h6' sx={{color: '#ddd'}}>
+              Chairs: {committee.chairs}
+            </Typography>
+            <hr/>
+            <Typography variant='body2' fontSize={18}>
+              {committee.description}
+            </Typography>
+          </TabPanel>
+        ))
+      }
+    </Box>
+  );
+}
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Box sx={{bgcolor: 'background.paper', opacity: 0.6}}>
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`vertical-tabpanel-${index}`}
+        aria-labelledby={`vertical-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            {children}
+          </Box>
+        )}
+      </div>
+    </Box>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
+  };
 }
 
 const committeesData = [
@@ -69,7 +147,7 @@ const committeesData = [
       `,
   },
   {
-    "title": 'Pakistan National Assembly:',
+    "title": 'Pakistan National Assembly',
     "chairs": 'Rafay Hakeem and Fatima Sarfaraz',
     "description": `The Pakistan National Assembly (PNA) is the lower house of the Pakistani Parliament, with its mandate proscribed within the Constitution of Pakistan. It is the legislative core of the parliamentary republic of Pakistan, consisting of elected representatives from constituencies across Pakistan’s four provinces.
 
@@ -78,12 +156,12 @@ const committeesData = [
       `,
   },
   {
-    "title": 'International Monetary Fund:',
+    "title": 'International Monetary Fund',
     "chairs": 'Ozair Zafar and Tarfa Siddiqui',
     "description": ` IMF at LUMUN this year simulates the Global financial crisis as it happened. The committee will try to reimagine the crisis with severe worldwide economic consequences. At IMF, we will rigorously investigate the causes of the crisis and help remedy and save what has been left behind. We will start from when the crisis began to escalate and simulate how financial and economic leaders behave to ensure the minimize global fallout.`,
   },
   {
-    "title": 'North Atlantic Treaty Organization:',
+    "title": 'North Atlantic Treaty Organization',
     "chairs": 'Hamza Saeed and Owais Sabri',
     "description": `The North Atlantic Treaty Organization protects vulnerable states from aggression. The compulsion to protect fellow members and the deterrence it inspires has led to a marked drop in international conflicts. But who gets this protection, and what exactly is the compulsion of the Responsibility to Protect? These questions are now more important than ever. This year NATO will look back at the effectiveness of its core principles, consider its limits to membership, and evaluate how to approach international crises, in both the present, and the future.`,
   },

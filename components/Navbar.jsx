@@ -18,7 +18,7 @@ export default function Navbar() {
     return (
         <header>
             <Box>
-                <AppBar>
+                <AppBar sx={{bgcolor: '#500'}}>
                     <Toolbar disableGutters>
                         <Box
                             sx={{flexGrow:1}}
