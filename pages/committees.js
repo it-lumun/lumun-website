@@ -55,14 +55,14 @@ export function VerticalTabs() {
         >
           {
             committeesData.map((committee, index) => (
-              <Tab label={committee.title} {...a11yProps(index)} />
+              <Tab key={index} label={committee.title} {...a11yProps(index)} />
             ))
           }
         </Tabs>
       </div>
       {
         committeesData.map((committee, index) => (
-          <TabPanel value={value} index={index}>
+          <TabPanel key={index} value={value} index={index}>
             <Typography variant='h6' sx={{color: '#ddd'}}>
               Chairs: {committee.chairs}
             </Typography>

@@ -17,9 +17,9 @@ export default function Faqs() {
       <main className={styles.main}>
         <div>
           {
-            Content.map(faq => {
+            Content.map((faq, index) => {
               return (
-                <Accordion sx={{opacity: 0.9}}>
+                <Accordion key={index} sx={{opacity: 0.9}}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                   >
