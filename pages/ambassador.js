@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Footer from '../components/FooterContent'
 import styles from '../styles/Home.module.css'
 import { Box, Typography, Grow } from '@mui/material'
+import React from 'react'
 
 export default function Ambassador() {
   return (
@@ -22,13 +23,13 @@ export default function Ambassador() {
               </Typography>
               <hr />
               {
-                program.map(line => (
-                  <>
+                program.map((line, index) => (
+                  <div key={index}>
                     <Typography variant='body1' fontSize={21}>
                       {line}
                     </Typography>
                     <br />
-                  </>
+                  </div>
                 ))
               }
             </div>

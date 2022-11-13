@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head'
 import Footer from '../components/FooterContent'
 import useWindowSize from '../hooks/useWindowSize'
-import { Tab, Tabs, Typography, Box, Grow } from '@mui/material'
+import { Tab, Tabs, Typography, Box, Grow, Slide } from '@mui/material'
 
 export default function Committees() {
   return (
@@ -84,8 +84,10 @@ function TabPanel(props) {
   if (value !== index) return null;
 
   return (
-    <Box sx={{ bgcolor: 'background.paper', opacity: 0.6, visibility: 'visible' }}>
-      <Grow in={true} {...{timeout: 1000}} style={{transformOrigin: '0 0 0'}}>
+    <Box
+      sx={{ bgcolor: 'background.paper', opacity: 0.6, visibility: 'visible' }}
+    >
+      <Grow in={true} {...{timeout: 1000}} style={{transformOrigin: 'top left'}}>
         <div
           role="tabpanel"
           hidden={value !== index}

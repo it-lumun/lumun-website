@@ -15,7 +15,8 @@ export default function Footer() {
             padding: "2rem 0",
             borderTop: "1px solid #eaeaea",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            marginTop: '4vh',
         }}>
             <Stack spacing={2} direction="row">
                 {links.facebook &&

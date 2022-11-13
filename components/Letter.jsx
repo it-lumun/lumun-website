@@ -13,7 +13,7 @@ export default function Letter({ MarkupText, photo }) {
 
     return (
         <div style={{
-            maxWidth: '80vw',
+            maxWidth: 'calc(80vw + 100px)',
             padding: '3rem',
             background: "linear-gradient(0deg, rgba(88,1,4,1) 17%, rgba(77,0,0,1) 38%, rgba(38,0,0,1) 65%)"
         }}>
