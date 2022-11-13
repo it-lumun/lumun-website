@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppBar, Toolbar, Box, Button, Tabs, Tab, IconButton } from '@mui/material'
+import HomeIcon from '@mui/icons-material/Home'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -18,27 +19,27 @@ export default function Navbar() {
     return (
         <header>
             <Box>
-                <AppBar sx={{bgcolor: '#500'}}>
+                <AppBar sx={{ bgcolor: '#500' }}>
                     <Toolbar disableGutters>
                         <Box
-                            sx={{flexGrow:1}}
+                            sx={{ flexGrow: 1 }}
                         />
-                        <Tabs 
-                            value={currentTabValue} 
+                        <Tabs
+                            value={currentTabValue}
                             TabIndicatorProps={{ sx: { bgcolor: '#eee' } }}
                             selectionFollowsFocus
                         >
                             <Link href="/">
-                                <Tab label="Home"{...getIdProps(0)} />
+                                <Tab label={<HomeIcon fontSize="medium"/>}{...getIdProps(0)} />
                             </Link>
                             <Link href="/committees">
-                                <Tab label="Committees"{...getIdProps(1)} />
+                                <Tab label={<Format text={"Committees"} />}{...getIdProps(1)} />
                             </Link>
                             <Link href="/ambassador">
-                                <Tab label="Ambassador Program" {...getIdProps(2)} />
+                                <Tab label={<Format text={"Ambassador Program"} />} {...getIdProps(2)} />
                             </Link>
                             <Link href="/faqs">
-                                <Tab label="FAQs" {...getIdProps(3)} />
+                                <Tab label={<Format text={"FAQs"} />} {...getIdProps(3)} />
                             </Link>
                         </Tabs>
                         <Box sx={{ flexGrow: 1 }} />
@@ -49,6 +50,14 @@ export default function Navbar() {
     )
 }
 
+const Format = ({ text }) => (
+    <span style={{ fontSize: 15 }}>
+        <strong>
+            {text}
+        </strong>
+    </span>
+)
+
 const getIdProps = (index) => ({
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -56,9 +65,9 @@ const getIdProps = (index) => ({
 
 const getTabValue = (route) => {
     const map = {
-        "/" : 0,
-        "/committees" : 1,
-        "/ambassador" : 2,
+        "/": 0,
+        "/committees": 1,
+        "/ambassador": 2,
         "/faqs": 3,
     }
     return map[route]

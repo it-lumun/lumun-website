@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer from '../components/FooterContent'
 import styles from '../styles/Home.module.css'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Grow } from '@mui/material'
 
 export default function Ambassador() {
   return (
@@ -15,20 +15,24 @@ export default function Ambassador() {
 
       <main className={styles.main}>
         <Box sx={{ bgcolor: 'background.paper', opacity: 0.8, padding: '20px 5vw' }}>
-          <Typography variant='h2'>
-            Ambassador Program
-          </Typography>
-          <hr />
-          {
-            program.map(line => (
-              <>
-                <Typography variant='body1' fontSize={21}>
-                  {line}
-                </Typography>
-                <br />
-              </>
-            ))
-          }
+          <Grow in={true} style={{transformOrigin: '0 0 0'}} {...{timeout: 1000}}>
+            <div>
+              <Typography variant='h2' sx={{ color: "#811" }}>
+                Ambassador Program
+              </Typography>
+              <hr />
+              {
+                program.map(line => (
+                  <>
+                    <Typography variant='body1' fontSize={21}>
+                      {line}
+                    </Typography>
+                    <br />
+                  </>
+                ))
+              }
+            </div>
+          </Grow>
         </Box>
       </main>
 

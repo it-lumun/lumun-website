@@ -1,11 +1,11 @@
-import { useState }  from 'react';
+import { useState } from 'react';
 import styles from '../styles/Home.module.css'
 import PropTypes from 'prop-types';
 import Head from 'next/head'
 import Footer from '../components/FooterContent'
 import useWindowSize from '../hooks/useWindowSize'
-import { Tab, Tabs, Typography, Box } from '@mui/material'
- 
+import { Tab, Tabs, Typography, Box, Grow } from '@mui/material'
+
 export default function Committees() {
   return (
     <div className={styles.container}>
@@ -40,7 +40,7 @@ export function VerticalTabs() {
     <Box
       sx={{ flexGrow: 0, display: 'flex' }}
     >
-      <div styles={{postion: 'absolute', minWidth: '30vw'}}>
+      <div styles={{ postion: 'absolute', minWidth: '30vw' }}>
         {/* if Tab is selected Its color would be red */}
         <Tabs
           orientation="vertical"
@@ -48,10 +48,11 @@ export function VerticalTabs() {
           value={value}
           onChange={handleChange}
           aria-label="Committees"
-          sx={{ borderRight: 1, borderColor: 'divider', width: tabWidth(),
-            '& .Mui-selected': {color: 'red'}
+          sx={{
+            borderRight: 1, borderColor: 'divider', width: tabWidth(),
+            '& .Mui-selected': { color: 'red' }
           }}
-          TabIndicatorProps={{sx: {bgcolor: 'red'}}}
+          TabIndicatorProps={{ sx: { bgcolor: 'red' } }}
         >
           {
             committeesData.map((committee, index) => (
@@ -63,10 +64,10 @@ export function VerticalTabs() {
       {
         committeesData.map((committee, index) => (
           <TabPanel key={index} value={value} index={index}>
-            <Typography variant='h6' sx={{color: '#ddd'}}>
+            <Typography variant='h6' sx={{ color: '#ddd' }}>
               Chairs: {committee.chairs}
             </Typography>
-            <hr/>
+            <hr />
             <Typography variant='body2' fontSize={18}>
               {committee.description}
             </Typography>
@@ -80,21 +81,23 @@ export function VerticalTabs() {
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
+  if (value !== index) return null;
+
   return (
-    <Box sx={{bgcolor: 'background.paper', opacity: 0.6}}>
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
+    <Box sx={{ bgcolor: 'background.paper', opacity: 0.6, visibility: 'visible' }}>
+      <Grow in={true} {...{timeout: 1000}} style={{transformOrigin: '0 0 0'}}>
+        <div
+          role="tabpanel"
+          hidden={value !== index}
+          id={`vertical-tabpanel-${index}`}
+          aria-labelledby={`vertical-tab-${index}`}
+          {...other}
+        >
           <Box sx={{ p: 3 }}>
             {children}
           </Box>
-        )}
-      </div>
+        </div>
+      </Grow>
     </Box>
   );
 }

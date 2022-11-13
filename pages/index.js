@@ -11,7 +11,7 @@ import Footer from '../components/FooterContent'
 import Letter from '../components/Letter'
 
 // Material UI
-import { Box, Button } from '@mui/material'
+import { Box, Button, Grow } from '@mui/material'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 
 // Data
@@ -33,13 +33,17 @@ export default function Home() {
 
       <main className={styles.main}>
         <Box textAlign='center'>
-          <Image
-            src={logo}
-            alt='LUMUN Logo'
-            style={{ borderRadius: '50%' }}
-            width={width > 800 ? 600 : width * 0.8}
-            height={width > 800 ? 600 : width * 0.8}
-          />
+          <Grow in={true} {...{timeout: 1500}}>
+            <div>
+              <Image
+                src={logo}
+                alt='LUMUN Logo'
+                style={{ borderRadius: '50%' }}
+                width={width > 800 ? 600 : width * 0.8}
+                height={width > 800 ? 600 : width * 0.8}
+              />
+            </div>
+          </Grow>
         </Box>
 
         <Link
@@ -47,7 +51,7 @@ export default function Home() {
           rel='noopener noreferrer'
           target='_blank'
         >
-          <Button 
+          <Button
             variant='contained'
             color='error'
             sx={{
@@ -55,7 +59,7 @@ export default function Home() {
               padding: '20px 40px'
             }}
           >
-            <AppRegistrationIcon/> REGISTER NOW
+            <AppRegistrationIcon /> REGISTER NOW
           </Button>
         </Link>
 

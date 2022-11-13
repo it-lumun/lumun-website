@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer from '../components/FooterContent'
 import styles from '../styles/Home.module.css'
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Typography, Slide } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export default function Faqs() {
@@ -15,28 +15,30 @@ export default function Faqs() {
       </Head>
 
       <main className={styles.main}>
-        <div>
-          {
-            Content.map((faq, index) => {
-              return (
-                <Accordion key={index} sx={{opacity: 0.9}}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                  >
-                    <Typography variant='h6'>
-                      {faq.summary}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography variant='body1'>
-                      {faq.details}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
-              )
-            })
-          }
-        </div>
+        <Slide in={true} direction='down' {...{timeout: 500}}>
+          <div>
+            {
+              Content.map((faq, index) => {
+                return (
+                  <Accordion key={index} sx={{ opacity: 0.9 }}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                    >
+                      <Typography variant='h6'>
+                        {faq.summary}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography variant='body1'>
+                        {faq.details}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                )
+              })
+            }
+          </div>
+        </Slide>
       </main>
 
       <Footer />
