@@ -24,8 +24,6 @@ export default function Home({ letters }) {
 
   const { width } = useWindowSize()
 
-  console.log(letters)
-
   return (
     <div className={styles.container}>
       <Head>
@@ -67,13 +65,15 @@ export default function Home({ letters }) {
         </Link>
 
         {
-          letters.map(letter => (
-            <Letter
-              key={letter.sys.id}
-              MarkupText={letter.fields.body}
-              photo={'https:' + letter.fields.profile.fields.file.url}
-            />
-          )).reverse()
+          letters
+            .sort((a, b) => a.fields.order - b.fields.order)
+            .map(letter => (
+              <Letter
+                key={letter.sys.id}
+                MarkupText={letter.fields.body}
+                photo={'https:' + letter.fields.profile.fields.file.url}
+              />
+            ))
         }
 
 

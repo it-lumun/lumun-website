@@ -79,11 +79,11 @@ export default function Navbar() {
                             <Link href="/ambassador">
                                 <Tab label={<Format text={"Ambassador Program"} />} {...getIdProps(2)} />
                             </Link>
-                            <Link href="/members">
-                                <Tab label={<Format text={"Members"} />} {...getIdProps(3)} />
-                            </Link>
+                            {/* <Link href="/members">
+                                <Tab label={<Format text={"Members"} />} {...getIdProps(4)} />
+                            </Link> */}
                             <Link href="/faqs">
-                                <Tab label={<Format text={"FAQs"} />} {...getIdProps(4)} />
+                                <Tab label={<Format text={"FAQs"} />} {...getIdProps(3)} />
                             </Link>
                         </Tabs>
                         <Box sx={{ flexGrow: 1 }} />
@@ -103,8 +103,8 @@ const smallMenu = [
     { href: '/', text: 'Home' },
     { href: '/committees', text: 'Committees' },
     { href: '/ambassador', text: 'Ambassador Program' },
-    { href: '/member', text: 'members' },
     { href: '/faqs', text: 'FAQs' },
+    // { href: '/member', text: 'members' },
 ]
 
 const SmallNavbarItem = ({ href, text, handleClose }) => {
@@ -135,8 +135,8 @@ const getTabValue = (route) => {
         "/": 0,
         "/committees": 1,
         "/ambassador": 2,
-        "/members": 3,
-        "/faqs": 4,
+        "/members": 4,
+        "/faqs": 3,
     }
     return map[route]
 }

@@ -26,6 +26,10 @@ export async function getStaticProps() {
 // member.fields.profileImage.fields.file.url or title
 export default function Faqs({ members }) {
 
+    const EC = members.filter((member) => member.fields.department === 'EC')
+    const Secretariat = members.filter((member) => member.fields.department === 'Secretariat')
+    const Directorate = members.filter((member) => member.fields.department === 'Directorate')
+
     return (
         <div className={styles.container}>
 
@@ -36,21 +40,9 @@ export default function Faqs({ members }) {
             </Head>
 
             <main className={styles.main}>
-                <Box sx={{ bgcolor: 'background.paper', opacity: '0.8', borderRadius: '5px', marginTop: '30px', }}>
-                    <div style={{ textAlign: 'left', minWidth: '80vw', margin: '0 20px' }}>
-                        <h1>EC</h1>
-                        <hr />
-                    </div>
-                    <Grid container spacing={3} sx={{
-                        maxWidth: '80vw', padding: '20px',
-                    }}>
-                        {members
-                            .filter((member) => member.fields.department === 'EC')
-                            .map(member => (
-                                <ProfileCard key={member.sys.id} member={member} />
-                            ))}
-                    </Grid>
-                </Box>
+                <MemberSection label={'Executive Council'} members={EC} />
+                <MemberSection label={'Secretariat'} members={Secretariat} />
+                <MemberSection label={'Directorate'} members={Directorate} />
             </main>
 
             <Footer />
@@ -58,3 +50,22 @@ export default function Faqs({ members }) {
     )
 }
 
+const MemberSection = ({ label, members }) => {
+    if (!members || members.length === 0) return null;
+
+    return (
+        <Box sx={{ bgcolor: 'background.paper', opacity: '0.8', borderRadius: '5px', marginTop: '30px', }}>
+            <div style={{ textAlign: 'left', minWidth: '80vw', margin: '0 20px' }}>
+                <h1>{label}</h1>
+                <hr />
+            </div>
+            <Grid container spacing={3} sx={{
+                maxWidth: '80vw', padding: '20px',
+            }}>
+                {members?.map(member => (
+                    <ProfileCard key={member.sys.id} member={member} />
+                ))}
+            </Grid>
+        </Box>
+    )
+}
