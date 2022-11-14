@@ -10,7 +10,6 @@ import useWindowSize from '../hooks/useWindowSize'
 // Components
 import Footer from '../components/FooterContent'
 import Letter from '../components/Letter'
-import ProfileCard from '../components/ProfileCard'
 
 // Material UI
 import { Box, Button, Grid, Grow } from '@mui/material'
@@ -21,9 +20,11 @@ import President_Letter from '../data/President_letter'
 import logo from '../data/logo.png'
 import president_pic from '../data/profile_pics/president.jpg'
 
-export default function Home({ members }) {
+export default function Home({ letters }) {
 
   const { width } = useWindowSize()
+
+  console.log(letters)
 
   return (
     <div className={styles.container}>
@@ -65,26 +66,16 @@ export default function Home({ members }) {
           </Button>
         </Link>
 
-        <Letter
-          MarkupText={President_Letter}
-          photo={president_pic}
-        />
+        {
+          letters.map(letter => (
+            <Letter
+              key={letter.sys.id}
+              MarkupText={letter.fields.body}
+              photo={'https:' + letter.fields.profile.fields.file.url}
+            />
+          )).reverse()
+        }
 
-        <Box sx={{bgcolor: 'background.paper', opacity: '0.8', borderRadius: '5px', marginTop: '30px', }}>
-          <div style={{ textAlign: 'left', minWidth: '80vw', margin: '0 20px' }}>
-            <h1>EC</h1>
-            <hr />
-          </div>
-          <Grid container spacing={3} sx={{
-            maxWidth: '80vw', padding: '20px',
-          }}>
-            {members
-              .filter((member) => member.fields.department === 'EC')
-              .map(member => (
-                <ProfileCard key={member.sys.id} member={member} />
-              ))}
-          </Grid>
-        </Box>
 
       </main>
 
@@ -100,11 +91,11 @@ export async function getStaticProps() {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   })
 
-  const res = await client.getEntries({ content_type: "member" })
+  const res = await client.getEntries({ content_type: "letter" })
 
   return {
     props: {
-      members: res.items,
+      letters: res.items,
     },
     revalidate: 1
   }

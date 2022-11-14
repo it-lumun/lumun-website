@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Footer from '../components/FooterContent'
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import ProfileCard from '../components/ProfileCard'
 import { createClient } from 'contentful';
 
@@ -36,15 +36,21 @@ export default function Faqs({ members }) {
             </Head>
 
             <main className={styles.main}>
-                <h1>EC</h1>
-                <hr />
-                <Grid container spacing={3}>
-                    {members
-                        .filter((member) => member.fields.department === 'EC')
-                        .map(member => (
-                            <ProfileCard key={member.sys.id} member={member} />
-                        ))}
-                </Grid>
+                <Box sx={{ bgcolor: 'background.paper', opacity: '0.8', borderRadius: '5px', marginTop: '30px', }}>
+                    <div style={{ textAlign: 'left', minWidth: '80vw', margin: '0 20px' }}>
+                        <h1>EC</h1>
+                        <hr />
+                    </div>
+                    <Grid container spacing={3} sx={{
+                        maxWidth: '80vw', padding: '20px',
+                    }}>
+                        {members
+                            .filter((member) => member.fields.department === 'EC')
+                            .map(member => (
+                                <ProfileCard key={member.sys.id} member={member} />
+                            ))}
+                    </Grid>
+                </Box>
             </main>
 
             <Footer />

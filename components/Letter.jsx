@@ -5,6 +5,8 @@ import Image from 'next/image'
 // Hooks
 import useWindowSize from '../hooks/useWindowSize'
 
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+
 // MarkupText takes a component and renders it as a simple markup
 // photo takes up the photo to be rendered
 export default function Letter({ MarkupText, photo }) {
@@ -15,16 +17,19 @@ export default function Letter({ MarkupText, photo }) {
         <div style={{
             maxWidth: 'calc(80vw + 100px)',
             padding: '3rem',
+            margin: '30px 0',
             background: "linear-gradient(0deg, rgba(88,1,4,1) 17%, rgba(77,0,0,1) 38%, rgba(38,0,0,1) 65%)"
         }}>
             <Stack direction="row" spacing={2}>
 
-                <MarkupText />
+                <div>
+                    {documentToReactComponents(MarkupText)}
+                </div>
 
                 {   // if photo is not null, render it
                     photo && width > 1200 && <Box display='flex' textAlign='center' alignItems='center'
                         sx={{
-                            borderLeft: '1px solid #fff',
+                            borderLeft: '1px solid #944',
                             paddingLeft: '2rem'
                         }}
                     >
@@ -33,7 +38,7 @@ export default function Letter({ MarkupText, photo }) {
                             alt='LUMUN Logo'
                             // style={{ borderRadius: '50%' }}
                             width={300}
-                            height={300}
+                            height={400}
                         />
                     </Box>
                 }
