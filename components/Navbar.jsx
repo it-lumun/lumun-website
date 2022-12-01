@@ -2,6 +2,7 @@ import React from 'react'
 import { AppBar, Toolbar, Box, Button, Tabs, Tab, IconButton, Menu, MenuItem, Typography } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 import MenuIcon from '@mui/icons-material/Menu'
+import CampaignIcon from '@mui/icons-material/Campaign';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useWindowSize } from '../hooks/useWindowSize'
@@ -64,6 +65,14 @@ export default function Navbar() {
                         <Box
                             sx={{ flexGrow: 1 }}
                         />
+                        <Link href={currentTabValue === 5 ? "/" : "/announcement"}>
+                            <IconButton
+                                size="large"
+                                sx={{ display: {sx: 'flex', md: 'none'} , position: 'absolute', right: '20px', top: '5px' }}
+                            >
+                                {currentTabValue === 5 ? <HomeIcon/> : <CampaignIcon />}
+                            </IconButton>
+                        </Link>
                         <Tabs
                             value={currentTabValue}
                             TabIndicatorProps={{ sx: { bgcolor: '#eee' } }}
@@ -79,11 +88,14 @@ export default function Navbar() {
                             <Link href="/ambassador">
                                 <Tab label={<Format text={"Ambassador Program"} />} {...getIdProps(2)} />
                             </Link>
-                            {/* <Link href="/members">
-                                <Tab label={<Format text={"Members"} />} {...getIdProps(4)} />
-                            </Link> */}
+                            <Link href="/members">
+                                <Tab label={<Format text={"Members"} />} {...getIdProps(3)} />
+                            </Link>
                             <Link href="/faqs">
-                                <Tab label={<Format text={"FAQs"} />} {...getIdProps(3)} />
+                                <Tab label={<Format text={"FAQs"} />} {...getIdProps(4)} />
+                            </Link>
+                            <Link href="/announcement">
+                                <Tab label={<CampaignIcon/>} {...getIdProps(5)} />
                             </Link>
                         </Tabs>
                         <Box sx={{ flexGrow: 1 }} />
@@ -103,8 +115,9 @@ const smallMenu = [
     { href: '/', text: 'Home' },
     { href: '/committees', text: 'Committees' },
     { href: '/ambassador', text: 'Ambassador Program' },
+    { href: '/members', text: 'members' },
     { href: '/faqs', text: 'FAQs' },
-    // { href: '/member', text: 'members' },
+    { href: '/announcement', text: 'Announcement' },
 ]
 
 const SmallNavbarItem = ({ href, text, handleClose }) => {
@@ -135,8 +148,9 @@ const getTabValue = (route) => {
         "/": 0,
         "/committees": 1,
         "/ambassador": 2,
-        "/members": 4,
-        "/faqs": 3,
+        "/members": 3,
+        "/faqs": 4,
+        "/announcement": 5,
     }
     return map[route]
 }
