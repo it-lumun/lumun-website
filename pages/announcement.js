@@ -7,7 +7,6 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Box } from '@mui/material'
 
 export default function AnnouncementPage({ announcements }) {
-  console.log("Annoncements: ", announcements)
   return (
     <div className={styles.container}>
       <Head>
@@ -24,6 +23,8 @@ export default function AnnouncementPage({ announcements }) {
                 background: "linear-gradient(340deg, rgba(88,1,4,1) 17%, rgba(77,0,0,1) 38%, rgba(38,0,0,1) 65%)",
                 padding: "3rem",
                 margin: "30px 0",
+                fontFamily: 'Monaco, monospace',
+                fontSize: "1.2rem",
               }}
             >
               {documentToReactComponents(announcement.fields.body)}

@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 import Head from 'next/head'
 import Footer from '../components/FooterContent'
 import useWindowSize from '../hooks/useWindowSize'
+import { createClient } from 'contentful';
+import MediaMenu from '../components/MediaMenu'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Tab, Tabs, Typography, Box, Grow, Slide } from '@mui/material'
 
-export default function Committees() {
+export default function Committees({committees}) {
   return (
     <div className={styles.container}>
 
@@ -17,7 +20,7 @@ export default function Committees() {
       </Head>
 
       <main className={styles.main}>
-        <VerticalTabs />
+        <VerticalTabs committees={committees}/>
       </main>
 
       <Footer />
@@ -25,7 +28,7 @@ export default function Committees() {
   )
 }
 
-export function VerticalTabs() {
+export function VerticalTabs({committees}) {
   const [value, setValue] = useState(0);
 
   const { width } = useWindowSize();
@@ -55,21 +58,25 @@ export function VerticalTabs() {
           TabIndicatorProps={{ sx: { bgcolor: 'red' } }}
         >
           {
-            committeesData.map((committee, index) => (
-              <Tab key={index} label={committee.title} {...a11yProps(index)} />
+            committees.map((committee, index) => (
+              <Tab key={committee.sys.id} label={committee.fields.name} {...a11yProps(index)} />
             ))
           }
         </Tabs>
       </div>
       {
-        committeesData.map((committee, index) => (
-          <TabPanel key={index} value={value} index={index}>
-            <Typography variant='h6' sx={{ color: '#ddd' }}>
-              Chairs: {committee.chairs}
+        committees.map((committee, index) => (
+          <TabPanel key={committee.sys.id} value={value} index={index}>
+            <MediaMenu 
+              names={committee.fields.attachmentNames} 
+              links={committee.fields.attachments}
+              />
+            <Typography variant='h5' sx={{ color: '#ddd' }}>
+              <strong>Chairs: {committee.fields.chairs.join(', ')}</strong>
             </Typography>
             <hr />
-            <Typography variant='body2' fontSize={18}>
-              {committee.description}
+            <Typography variant='body2' fontSize={24} fontFamily='menlo'>
+              {documentToReactComponents(committee.fields.description)}
             </Typography>
           </TabPanel>
         ))
@@ -79,15 +86,15 @@ export function VerticalTabs() {
 }
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, media, ...other } = props;
 
   if (value !== index) return null;
 
   return (
     <Box
-      sx={{ bgcolor: 'background.paper', opacity: 0.6, visibility: 'visible' }}
+      sx={{ bgcolor: 'background.paper', opacity: 0.6, visibility: 'visible', position: 'relative' }}
     >
-      <Grow in={true} {...{timeout: 1000}} style={{transformOrigin: 'top left'}}>
+      <Grow in={true} {...{ timeout: 1000 }} style={{ transformOrigin: 'top left' }}>
         <div
           role="tabpanel"
           hidden={value !== index}
@@ -115,6 +122,24 @@ function a11yProps(index) {
     id: `vertical-tab-${index}`,
     'aria-controls': `vertical-tabpanel-${index}`,
   };
+}
+
+export async function getStaticProps() {
+
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+  })
+
+  const res = await client.getEntries({ content_type: "committee" })
+
+  return {
+    props: {
+      committees: res.items,
+    },
+    revalidate: 1
+  }
+
 }
 
 const committeesData = [

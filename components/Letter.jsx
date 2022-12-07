@@ -15,6 +15,8 @@ export default function Letter({ MarkupText, photo }) {
 
     return (
         <div style={{
+            boxShadow: '0 0 10px #944',
+            fontFamily: 'Monaco, monospace',
             maxWidth: 'calc(80vw + 100px)',
             padding: '3rem',
             margin: '30px 0',

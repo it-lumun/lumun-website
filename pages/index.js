@@ -10,17 +10,16 @@ import useWindowSize from '../hooks/useWindowSize'
 // Components
 import Footer from '../components/FooterContent'
 import Letter from '../components/Letter'
+import Countdown from 'react-countdown'
 
 // Material UI
-import { Box, Button, Grid, Grow } from '@mui/material'
+import { Box, Button, Grid, Grow, Typography } from '@mui/material'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 
 // Data
-import President_Letter from '../data/President_letter'
 import logo from '../data/logo.png'
-import president_pic from '../data/profile_pics/president.jpg'
 
-export default function Home({ letters }) {
+export default function Home({ letters, theme }) {
 
   const { width } = useWindowSize()
 
@@ -64,6 +63,31 @@ export default function Home({ letters }) {
           </Button>
         </Link>
 
+        <Countdown
+          date={theme.fields.eventdate}
+          renderer={({ days, hours, minutes, seconds, completed }) => (
+            <Box
+              sx={{ bgcolor: '#300', padding: '20px 80px', borderRadius: '20px', boxShadow: '0 0 10px 0 #000'}}
+            >
+              <Typography fontSize={width < 600 ? 28 : 52} variant="h1">
+                <strong>{days} : {pad(hours)} : {pad(minutes)} : {pad(seconds)}</strong>
+              </Typography>
+
+            </Box>
+          )}
+        />
+
+        {/* create a line break with a reddish box shaddow */}
+        <div
+          style={{
+            width: '100%',
+            height: '2px',
+            backgroundColor: '#300',
+            boxShadow: '0 0 10px 0 #000',
+            margin: '40px 0',
+          }}
+        />
+
         {
           letters
             .sort((a, b) => a.fields.order - b.fields.order)
@@ -93,10 +117,20 @@ export async function getStaticProps() {
 
   const res = await client.getEntries({ content_type: "letter" })
 
+  const themes = await client.getEntries({ content_type: "theme" })
+  
+
+  const activeThemes = themes.items.filter((theme) => theme.fields.isActive)
+  
+  const theme = (activeThemes || activeThemes.length > 0) ? activeThemes[0] : themes.items[0]
+
   return {
     props: {
       letters: res.items,
+      theme: theme
     },
     revalidate: 1
   }
 }
+
+const pad = number => number < 10 ? `0${number}` : number
