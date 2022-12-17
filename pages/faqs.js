@@ -32,6 +32,16 @@ export default function Faqs() {
                       <Typography variant='body1'>
                         {faq.details}
                       </Typography>
+                      {
+                        faq.link && (
+                          <a href={faq.link} target='_blank' rel='noreferrer'>
+                            <Typography variant='body1' color='primary'>
+                              Click here to view the document.
+                            </Typography>
+                          </a>
+                        )
+
+                      }
                     </AccordionDetails>
                   </Accordion>
                 )
@@ -61,7 +71,8 @@ const Content = [
   },
   {
     summary: 'What rules of procedure will be followed?',
-    details: 'Please find the Rule of Procedure here. (attach the link)'
+    details: 'Please find the Rule of Procedure here.',
+    link: 'https://drive.google.com/file/d/1wz3U3Y7_-biNQ4nuo0QZBQlEVHIum9vW/view?usp=drivesdk',
   },
   {
     summary: 'What is the minimum age for a delegate?',

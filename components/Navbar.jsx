@@ -115,7 +115,7 @@ const smallMenu = [
     { href: '/', text: 'Home' },
     { href: '/committees', text: 'Committees' },
     { href: '/ambassador', text: 'Ambassador Program' },
-    { href: '/members', text: 'members' },
+    { href: '/members', text: 'Members' },
     { href: '/faqs', text: 'FAQs' },
     { href: '/announcement', text: 'Announcement' },
 ]
