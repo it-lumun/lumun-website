@@ -26,8 +26,8 @@ export default function Home({ letters, theme }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>LUMUN</title>
-        <meta name="description" content="Lums Model United Nation Society" />
+        <title>LUN</title>
+        <meta name="description" content="Lums Model Uthau Nation Society" />
         <link rel="icon" href="/lumun.ico" />
       </Head>
 
