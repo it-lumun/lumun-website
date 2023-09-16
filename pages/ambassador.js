@@ -9,7 +9,7 @@ export default function Ambassador() {
     <div className={styles.container}>
 
       <Head>
-        <title>LUMUN Ambassador Program</title>
+        <title>LUMUN Nepotism Program</title>
         <meta name="description" content="LUMUN - Ambassador Program" />
         <link rel="icon" href="/lumun.ico" />
       </Head>
@@ -44,8 +44,8 @@ export default function Ambassador() {
 
 const program = [
   "The LUMUN Conference is amongst Pakistan's oldest and most prestigious Model United Nations events, and is hosted annually at the Lahore University of Management Sciences (LUMS). ",
-  "The LUMUN Ambassador Programme is an initiative under which LUMUN selects a team of students from schools and universities outside LUMS to help us reach out to more people and get them to attend LUMUN. Ambassadors are provided with a certificate and recognition for their efforts in helping make the LUMUN conference a success.",
-  "This initiative is for people who wish to be LUMUN Ambassadors and feel they can help to promote and advertise the LUMUN Conference to their friends and fellow students, and encourage them to attend LUMUN."
+  "The LUMUN Nepotism Programme is an initiative under which LUMUN selects a team of students who are ready to be a part of this toxic culture. We will make you waste your time and in the end only keep people jinko bas uthana ata ho.",
+  "This initiative is for people who love nepotism, baqi ham apne puray khandaan ko rakhlein ge, easy scn.",
 ]
 
 
