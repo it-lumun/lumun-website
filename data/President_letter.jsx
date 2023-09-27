@@ -1,7 +1,7 @@
 const President_letter = () => (
     <div>
         <h3>
-            President's Letter
+            THIS WEBSITE HAS BEEN HACKED AND UNDER OUR CONTROL. PLEASE DON'T BOTHER RETREIVING BECAUSE YOU CAN'T. 
         </h3>
         <p>
             Dear Delegates,
